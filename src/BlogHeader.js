@@ -5,7 +5,7 @@ var moment = require('moment');
 class BlogHeader extends Component {
 	render(){
 		return(
-			<header className='blogHeader'>Welcome to my Blog! <br/> Current Date & Time: {moment().toString()}</header>
+			<header className='blogHeader'>Welcome to my Blog! <br/> Current Date & Time: {moment().format('ddd')}</header>
 		)
 	}
 }
