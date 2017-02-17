@@ -12,16 +12,26 @@ const removePost = (id, posts) => {
   return posts.filter(removeIt)
 }
 
+const toggleEdit = (id, posts) => {
+  function changeStatus(post){
+    if(post.id === id){
+      post.isEditing = !post.isEditing
+    }
+    return post
+  }
+  return posts.map(changeStatus)
+}
+
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
       blogPosts: [
-        {id: 1, content: 'content goes here', author: 'Jake', date: moment().toString()},
-        {id: 2, content: 'content goes here2', author: 'Jake F', date: moment().toString()},
-        {id: 3, content: 'content goes here3', author: 'Jake Fi', date: moment().toString()},
-        {id: 4, content: 'content goes here4', author: 'Jake Fis', date: moment().toString()},
-        {id: 5, content: 'content goes here5', author: 'Jake Fish', date: moment().toString()},
+        {id: 1, content: 'content goes here', author: 'Jake', date: moment().toString(), isEditing: false},
+        {id: 2, content: 'content goes here2', author: 'Jake F', date: moment().toString(), isEditing: false},
+        {id: 3, content: 'content goes here3', author: 'Jake Fi', date: moment().toString(), isEditing: false},
+        {id: 4, content: 'content goes here4', author: 'Jake Fis', date: moment().toString(), isEditing: false},
+        {id: 5, content: 'content goes here5', author: 'Jake Fish', date: moment().toString(), isEditing: false},
       ],
       formContent: '',
       formAuthor: ''
@@ -40,6 +50,10 @@ class App extends Component {
     this.setState({blogPosts: this.state.blogPosts.concat([post]), formContent: '', formAuthor: ''})
   }
 
+  handleToggleEdit(id){
+    this.setState({blogPosts: toggleEdit(id, this.state.blogPosts)})
+  }
+
   render() {
     return (
       <div className="App">
@@ -56,7 +70,9 @@ class App extends Component {
                         content={post.content} 
                         author={post.author} 
                         date={post.date}
-                        onDelete={this.handleDelete.bind(this)}/>
+                        isEditing={post.isEditing}
+                        onDelete={this.handleDelete.bind(this)}
+                        onToggleEdit={this.handleToggleEdit.bind(this)}/>
             ))
           }
         </ul>
