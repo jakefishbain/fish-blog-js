@@ -5,6 +5,13 @@ import BlogInputs from './BlogInputs';
 import BlogPost from './BlogPost'
 var moment = require('moment');
 
+const removePost = (id, posts) => {
+  function removeIt(post){
+    return post.id !== id
+  }
+  return posts.filter(removeIt)
+}
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -18,7 +25,10 @@ class App extends Component {
       ]
     }
   }
-  //CONSTRUCTOR FOR STATE
+
+  handleDelete(id){
+    this.setState({blogPosts: removePost(id, this.state.blogPosts)})
+  }
 
   render() {
     return (
@@ -28,7 +38,12 @@ class App extends Component {
         <ul className='blogList'>
           {
             this.state.blogPosts.map(post => (
-              <BlogPost key={post.id} content={post.content} author={post.author} date={post.date}/>
+              <BlogPost key={post.id} 
+                        id={post.id}
+                        content={post.content} 
+                        author={post.author} 
+                        date={post.date}
+                        onDelete={this.handleDelete.bind(this)}/>
             ))
           }
         </ul>
