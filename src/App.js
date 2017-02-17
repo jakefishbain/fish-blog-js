@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import BlogHeader from './BlogHeader';
-import BlogInputs from './BlogInputs';
+import BlogForm from './BlogForm';
 import BlogPost from './BlogPost'
 var moment = require('moment');
 
@@ -22,7 +22,9 @@ class App extends Component {
         {id: 3, content: 'content goes here3', author: 'Jake Fi', date: moment().toString()},
         {id: 4, content: 'content goes here4', author: 'Jake Fis', date: moment().toString()},
         {id: 5, content: 'content goes here5', author: 'Jake Fish', date: moment().toString()},
-      ]
+      ],
+      formContent: '',
+      formAuthor: ''
     }
   }
 
@@ -30,11 +32,22 @@ class App extends Component {
     this.setState({blogPosts: removePost(id, this.state.blogPosts)})
   }
 
+  handleChangeInput(text, field){
+    this.setState({[field]: text})
+  }
+
+  handleAddPost(post){
+    this.setState({blogPosts: this.state.blogPosts.concat([post]), formContent: '', formAuthor: ''})
+  }
+
   render() {
     return (
       <div className="App">
         <BlogHeader/>
-        <BlogInputs />
+        <BlogForm formContent={this.state.formContent} 
+                  formAuthor={this.state.formAuthor}
+                  onChangeInput={this.handleChangeInput.bind(this)}
+                  onAddPost={this.handleAddPost.bind(this)}/>
         <ul className='blogList'>
           {
             this.state.blogPosts.map(post => (
