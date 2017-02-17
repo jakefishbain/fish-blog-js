@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+var moment = require('moment');
+
 
 class BlogHeader extends Component {
 	render(){
 		return(
-			<header>Welcome to my Blog!</header>
+			<header className='blogHeader'>Welcome to my Blog! <br/> Current Date & Time: {moment().toString()}</header>
 		)
 	}
 }
