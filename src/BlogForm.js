@@ -17,7 +17,7 @@ class BlogForm extends Component {
 		return(
 			<div className='blogInputs'>
 				<form onSubmit={this.handleSubmit.bind(this)}>
-					<textarea rows='15' cols='200' onChange={this.handleChange.bind(this, 'formContent')} value={this.props.formContent}></textarea>
+				<textarea rows='15' cols='200' onChange={this.handleChange.bind(this, 'formContent')} value={this.props.formContent}></textarea><br/>
 					<input type='text' placeholder='Author' onChange={this.handleChange.bind(this, 'formAuthor')} value={this.props.formAuthor}/>
 					<input type='submit' value='Submit'/>
 				</form>
