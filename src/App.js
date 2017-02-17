@@ -22,6 +22,28 @@ const toggleEdit = (id, posts) => {
   return posts.map(changeStatus)
 }
 
+const changeContent = (id, text, posts) => {
+  function saveContent(post){
+    if(post.id === id){
+      post.content = text
+    }
+    return post
+  }
+  return posts.map(saveContent)
+}
+
+const changeAuthor = (id, text, posts) => {
+  function saveAuthor(post){
+    if(post.id === id){
+      post.author = text
+    }
+    return post
+  }
+  return posts.map(saveAuthor)
+}
+
+
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -54,6 +76,14 @@ class App extends Component {
     this.setState({blogPosts: toggleEdit(id, this.state.blogPosts)})
   }
 
+  handleContentChange(id, text){
+    this.setState({blogPosts: changeContent(id, text, this.state.blogPosts)})
+  }
+
+  handleAuthorChange(id, text){
+    this.setState({blogPosts: changeAuthor(id, text, this.state.blogPosts)})
+  }
+
   render() {
     return (
       <div className="App">
@@ -64,7 +94,7 @@ class App extends Component {
                   onAddPost={this.handleAddPost.bind(this)}/>
         <ul className='blogList'>
           {
-            this.state.blogPosts.map(post => (
+            this.state.blogPosts.slice().reverse().map(post => (
               <BlogPost key={post.id} 
                         id={post.id}
                         content={post.content} 
@@ -72,7 +102,10 @@ class App extends Component {
                         date={post.date}
                         isEditing={post.isEditing}
                         onDelete={this.handleDelete.bind(this)}
-                        onToggleEdit={this.handleToggleEdit.bind(this)}/>
+                        onToggleEdit={this.handleToggleEdit.bind(this)}
+                        onContentChange={this.handleContentChange.bind(this)}
+                        onAuthorChange={this.handleAuthorChange.bind(this)}
+              />
             ))
           }
         </ul>
