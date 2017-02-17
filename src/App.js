@@ -10,11 +10,11 @@ class App extends Component {
     super(props);
     this.state = {
       blogPosts: [
-        {content: 'content goes here', author: 'Jake', date: {moment().toString()}},
-        {content: 'content goes here2', author: 'Jake F', date: {moment().toString()}},
-        {content: 'content goes here3', author: 'Jake Fi', date: {moment().toString()}},
-        {content: 'content goes here4', author: 'Jake Fis', date: {moment().toString()}},
-        {content: 'content goes here5', author: 'Jake Fish', date: {moment().toString()}},
+        {id: 1, content: 'content goes here', author: 'Jake', date: moment().toString()},
+        {id: 2, content: 'content goes here2', author: 'Jake F', date: moment().toString()},
+        {id: 3, content: 'content goes here3', author: 'Jake Fi', date: moment().toString()},
+        {id: 4, content: 'content goes here4', author: 'Jake Fis', date: moment().toString()},
+        {id: 5, content: 'content goes here5', author: 'Jake Fish', date: moment().toString()},
       ]
     }
   }
@@ -25,9 +25,11 @@ class App extends Component {
       <div className="App">
         <BlogHeader/>
         <BlogInputs/>
-        <ul>
+        <ul className='blogList'>
           {
-            <BlogPost/>
+            this.state.blogPosts.map(post => (
+              <BlogPost key={post.id} content={post.content} author={post.author} date={post.date}/>
+            ))
           }
         </ul>
       </div>
