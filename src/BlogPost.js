@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EditableText from './EditableText'
 
 class BlogPost extends Component {
 	renderActionBtn(){
@@ -12,8 +13,12 @@ class BlogPost extends Component {
 	render(){
 		return(
 			<li className='blogPost'>
-				<p className='postContent'>{this.props.content}</p>
-				<p className='postAuthor'>Post by: {this.props.author} on {this.props.date}</p>
+
+				<EditableText label='post'/>
+					<p className='postContent'>{this.props.content}</p>
+				<EditableText label='author'/>
+					<p className='postAuthor'>Post by: {this.props.author} on {this.props.date}</p>
+
 				{this.renderActionBtn()}
 				<button onClick={() => this.props.onDelete(this.props.id)} className='deleteBtn'>🗑</button>
 			</li>
