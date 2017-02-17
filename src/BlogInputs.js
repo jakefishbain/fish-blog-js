@@ -4,9 +4,11 @@ class BlogInputs extends Component {
 	render(){
 		return(
 			<div className='blogInputs'>
-				<textarea rows='15' cols='200'></textarea>
-				<input type='text' placeholder='Author'/>
-				<button>Submit</button>
+				<form>
+					<textarea rows='15' cols='200' ></textarea>
+					<input type='text' placeholder='Author'/>
+					<input type='submit' value='Submit'/>
+				</form>
 			</div>
 		)
 	}

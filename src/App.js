@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className="App">
         <BlogHeader/>
-        <BlogInputs/>
+        <BlogInputs />
         <ul className='blogList'>
           {
             this.state.blogPosts.map(post => (
